@@ -1,0 +1,11 @@
+1. Instalar si no está instalado: npm install -g gltf-pipeline
+
+2. convertir a un solo archivo: gltf-pipeline -i scene.gltf -o modelDraco.gltf -d   
+//(scene es el nombre del archivo base y modelDraco es el nombre del archivo destino)
+
+3. converir a gltfjsx: npx gltfjsx modelDraco.gltf --transform
+//(asegurarse de tener instalado 'read-pkg-up' si no instalarlo 'npm i read-pkg-up')
+
+4. Se crearon dos archivos un archivo 'modelDraco-transformed.glb' el cual se debe poner en la carpeta assets del proyecto de react y el archivo 'modelDraco.jsx' que es el componente usable.
+
+5. Recordar cambiar ponerle el 'default' a la function del jsx creado 'export default function Model(props)'

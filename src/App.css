@@ -1,0 +1,25 @@
+/* Ocultar el scrollbar en Chrome */
+
+.maincontainer::-webkit-scrollbar-track {
+    background: transparent;
+    /* Puedes cambiar esto al color que desees */
+}
+
+.maincontainer::-webkit-scrollbar-thumb {
+    background-color: transparent;
+    border: none;
+}
+
+.maincontainer::-webkit-scrollbar {
+    display: none;
+    width: 0.1em;
+
+}
+
+.maincontainer {
+
+    -ms-overflow-style: none;
+    /* IE and Edge */
+    scrollbar-width: none;
+    /* Firefox */
+}

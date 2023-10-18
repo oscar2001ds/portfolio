@@ -1,0 +1,35 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+/* :root::-webkit-scrollbar {
+  display: none;
+} */
+
+
+
+:root {
+  font-family: system-ui, Helvetica, Arial, sans-serif;
+  /* overflow: hidden; */
+  /* background-color: #242424; */
+  background-color: black;
+  /* background: url('./img/bg.jpg'); */
+  --primary-color: white;
+  --secondary-color-1: #dc2626;
+  --secondary-color-2: #0dc7fa;
+  --secondary-color: var(--secondary-color-1);
+}
+
+.w-reduced{
+  width: 100%;
+}
+
+html {
+  color: var(--primary-color);
+}
+
+
+.active{
+  color: var(--secondary-color);
+}
