@@ -134,7 +134,7 @@ export const LoaderSkillsBalls = ({ fileName }) => {
     const scene = new THREE.Scene();
 
     // Envaironment map:
-    const enviromentMap = new THREE.CubeTextureLoader().setPath('src/assets/environmentMap/').load([
+    const enviromentMap = new THREE.CubeTextureLoader().setPath('public/environmentMap/').load([
       'px.png',
       'nx.png',
       'py.png',
@@ -185,12 +185,12 @@ export const LoaderSkillsBalls = ({ fileName }) => {
 
     // Draco loader:
     const dracoLoader = new DRACOLoader();
-    dracoLoader.setDecoderPath('src/assets/draco/gltf/');
+    dracoLoader.setDecoderPath('public/draco/gltf/');
 
     // GLTF loader:
     const loader = new GLTFLoader(loadingManager);
     loader.setDRACOLoader(dracoLoader);
-    loader.load(`src/assets/3Dmodels/dodecaedros/${fileName}`, function (gltf) {
+    loader.load(`public/3Dmodels/dodecaedros/${fileName}`, function (gltf) {
 
       //console.log(gltf);
       const model = gltf.scene;

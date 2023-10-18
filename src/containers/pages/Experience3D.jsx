@@ -2,12 +2,12 @@ import { LoaderRobot } from "../../components/LoaderRobot";
 import { globalVariables } from "../../store/globalStore";
 import { useRef, useState, useEffect } from "react"
 import { gsap } from "gsap";
-import labotaroryBlueImage from '../../assets/img/laboratory_blue.png';
-import labotaroryRedImage from '../../assets/img/laboratory_red.png';
-import capsuleRed from '../../assets/img/capsule_red.png';
-import capsuleBlue from '../../assets/img/capsule_blue.png';
-import labItemsRed from '../../assets/img/lab_items_red.png';
-import labItemsBlue from '../../assets/img/lab_items_blue.png';
+import labotaroryBlueImage from '../../../public/img/laboratory_blue.png';
+import labotaroryRedImage from '../../../public/img/laboratory_red.png';
+import capsuleRed from '../../../public/img/capsule_red.png';
+import capsuleBlue from '../../../public/img/capsule_blue.png';
+import labItemsRed from '../../../public/img/lab_items_red.png';
+import labItemsBlue from '../../../public/img/lab_items_blue.png';
 
 
 

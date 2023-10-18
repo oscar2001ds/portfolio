@@ -1,5 +1,5 @@
-import homeImageRed from '../../assets/img/oscar_home_red.png';
-import homeImageBlue from '../../assets/img/oscar_home_blue.png';
+import homeImageRed from '../../../public/img/oscar_home_red.png';
+import homeImageBlue from '../../../public/img/oscar_home_blue.png';
 import { ChangeWordsAniamation } from '../../components/ChangeWordsAniamation';
 import { gsap } from 'gsap';
 import { useEffect, useRef, useState } from 'react';

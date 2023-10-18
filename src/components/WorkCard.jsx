@@ -59,7 +59,7 @@ export const WorkCard = ({ id, img, title, tecs, desc, currentCard, setCurrentCa
       <div id={id} className={`flex ${pointer ? 'cursor-pointer' : ''}`} onClick={handleClick}>
         <div className={`w-[250px] h-[44vh] rounded-xl ${colorCard.bgCard} overflow-hidden flex flex-col ${pointer ? colorCard.bgHoverCard+' sm:hover:-translate-y-2' : 'translate-y-0'}`}>
           <div className={`h-[50%] rounded-lg m-[0.38rem] overflow-hidden ${colorCard.bgImg}`}>
-            <img src={`src/assets/img/${img} `} alt="" className="w-full h-full object-cover" />
+            <img src={`public/img/${img} `} alt="" className="w-full h-full object-cover" />
           </div>
           <div className="font-bold text-lg flex justify-start mx-[0.38rem] pointer-events-none">
             {title}

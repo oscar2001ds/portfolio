@@ -2,9 +2,9 @@ import React, { useState, useEffect, useRef } from 'react';
 import { globalVariables } from '../../store/globalStore';
 import gsap from 'gsap';
 import emailjs from '@emailjs/browser';
-import linkedinLogo from '../../assets/img/linkedin.svg'
-import githubLogo from '../../assets/img/github.svg'
-import instagramLogo from '../../assets/img/instagram.svg'
+import linkedinLogo from '../../../public/img/linkedin.svg'
+import githubLogo from '../../../public/img/github.svg'
+import instagramLogo from '../../../public/img/instagram.svg'
 
 const ContactForm = ({ setMessageSend }) => {
   const form = useRef();

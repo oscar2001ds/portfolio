@@ -58,7 +58,7 @@ export const LoaderRobot = () => {
         else if (child.name === 'Robot_Mesh') {
           let material;
           let diffuseTexture;
-          const texturePath = 'src/assets/3Dmodels/robot/textures/'
+          const texturePath = 'public/3Dmodels/robot/textures/'
                   
 
           material = child.material[0];
@@ -309,7 +309,7 @@ export const LoaderRobot = () => {
 
     // Envaironment:
     const scene = new THREE.Scene();
-    const enviromentMap = new THREE.CubeTextureLoader().setPath('src/assets/environmentMap/').load([
+    const enviromentMap = new THREE.CubeTextureLoader().setPath('public/environmentMap/').load([
       'px.png',
       'nx.png',
       'py.png',
@@ -365,7 +365,7 @@ export const LoaderRobot = () => {
     // FBX loader:
     const loader = new FBXLoader(loadingManager);
     let model1
-    loader.load(`src/assets/3Dmodels/${fileName}`, function (model) {
+    loader.load(`public/3Dmodels/${fileName}`, function (model) {
       model1 = model
       model.position.set(initialPosition.x, initialPosition.y, initialPosition.z);
       model.rotation.set(initialRotation.x, initialRotation.y, initialRotation.z);
@@ -383,7 +383,7 @@ export const LoaderRobot = () => {
         mixer = new THREE.AnimationMixer(model);
 
         const animationFBX = new FBXLoader();
-        animationFBX.setPath('src/assets/3Dmodels/robot/animations/');
+        animationFBX.setPath('public/3Dmodels/robot/animations/');
         animationFBX.load('StandingGreeting.fbx', (fbxAnim) => {
           animationFBX.load('Jumping Down.fbx', (fbxAnim2) => {
             animationFBX.load('Jumping.fbx', (fbxAnim3) => {
