@@ -163,9 +163,8 @@ export const LoaderRobot = () => {
 
   // Play Animation:
   useEffect(() => {
-    console.log('animation: ', animation)
     if (animation === '') return
-
+    
     function crossfade(animFrom, animTo, duration) {
       animFrom.fadeOut(duration).play();
       animTo.fadeIn(duration).play();
@@ -188,7 +187,6 @@ export const LoaderRobot = () => {
       stopAnimations();
       switch (currentAnimationS1) {
         case 'animGreeting':
-          console.log('animGreeting')
           animaciones['animGreeting'].repetitions = 1;
           if (S1_First) {
             crossfade(animaciones['animFalling'], animaciones['animGreeting'], 0.6)
@@ -200,7 +198,6 @@ export const LoaderRobot = () => {
           currentAnimationS1 = 'animStand';
           break;
         case 'animStand':
-          console.log('animStand')
           animaciones['animStand'].repetitions = 1;
           if (S1_2) {
             crossfade(animaciones['animJump2'], animaciones['animStand'], 2)
@@ -217,14 +214,12 @@ export const LoaderRobot = () => {
           currentAnimationS1 = 'animStretch';
           break;
         case 'animStretch':
-          console.log('animStretch')
           animaciones['animStretch'].repetitions = 1;
           crossfade(animaciones['animStand'], animaciones['animStretch'], 0.5)
           currentAnimationS1 = 'animGreeting';
           break;
 
         case 'animFloating':
-          console.log('animFloating')
           if (S1_3) {
             animaciones['animFloating'].repetitions = Infinity;
             crossfade(animaciones['animFalling'], animaciones['animFloating'], 1)
@@ -235,7 +230,6 @@ export const LoaderRobot = () => {
           break;
 
         case 'animOnlyFalling':
-          console.log('animOnlyFalling')
           if (S1_First) {
             animaciones['animFalling'].repetitions = Infinity;
             animaciones['animFalling'].play();
@@ -246,7 +240,6 @@ export const LoaderRobot = () => {
           break;
 
         case 'animThumbs':
-          console.log('animThumbs')
           animaciones['animThumbs'].repetitions = 1;
           crossfade(animaciones['animFalling'], animaciones['animThumbs'], 1)
           addMaterial({ wireframe: false })
