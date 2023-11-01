@@ -7,7 +7,7 @@ import { useEffect } from 'react';
 import { globalVariables } from '../store/globalStore';
 
 
-const fileName = 'robot/robot.FBX'
+const fileName = 'robot/robot.fbx'
 const initialPosition = { 'x': 0, 'y': -12, 'z': 0 }
 const initialRotation = { 'x': 0, 'y': Math.PI / 3.8, 'z': 0 }
 //const initialRotation= {'x': 0, 'y': 0, 'z': 0}
