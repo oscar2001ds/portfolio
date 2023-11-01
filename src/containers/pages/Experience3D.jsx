@@ -106,7 +106,7 @@ export const Experience3D = ({ show }) => {
         setTimeout(() => {
           setAnimation('firstAnimation')
           gsap.to(robotContainerRef.current, {
-            opacity: 1,
+            opacity: 0,
             x: `${posX - 200}px`,
             y: `${0}px`,
             duration: 0.01,
