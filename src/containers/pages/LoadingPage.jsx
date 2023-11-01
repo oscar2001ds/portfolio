@@ -4,11 +4,14 @@ import { useEffect } from 'react';
 
 
 export const LoadingPage = () => {
-    const { refreshContainerSize, setRefreshContainerSize, modelLoaded, pageMode, maxHeight } = globalVariables()
+    const { refreshContainerSize, setRefreshContainerSize, modelLoaded, pageMode, maxHeight, setPageLoaded } = globalVariables()
 
     useEffect(() => {
         if (Object.values(modelLoaded).every((valor) => (valor === true))) {
-            setTimeout(() => setRefreshContainerSize(true), 1700)
+            setTimeout(() => {
+                setRefreshContainerSize(true)
+                setPageLoaded(true)
+            }, 500)
 
         }
     }, [modelLoaded]);

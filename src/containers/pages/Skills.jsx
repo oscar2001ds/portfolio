@@ -5,7 +5,7 @@ import { globalVariables } from "../../store/globalStore"
 
 
 
-const LevelCard = ({ side, show, delayInAnimation, level, fileName, pageMode }) => {
+const LevelCard = ({ side, show, delayInAnimation, level, fileObj, pageMode }) => {
   const [initialColorNumber, setInitialColorNumber] = useState(null)
   const [levelBarClass, setLevelBarClass] = useState(null)
   const [levelBarClassActive, setLevelBarClassActive] = useState(null)
@@ -90,8 +90,8 @@ const LevelCard = ({ side, show, delayInAnimation, level, fileName, pageMode }) 
   return (
     <>
       <div ref={descrContainerRef} className="flex items-center">
-        {side === 'left' ? <div className="relative flex w-[17vh] h-full justify-center items-center bg-transparent"><LoaderSkillsBalls fileName={fileName} /></div> : null}
-        <div id={fileName} className="flex bg-transparent h-[5vh] p-2 transform -skew-x-12">
+        {side === 'left' ? <div className="relative flex w-[17vh] h-full justify-center items-center bg-transparent"><LoaderSkillsBalls fileId={Object.keys(fileObj)[0]} fileName={Object.values(fileObj)[0]} /></div> : null}
+        <div id={Object.values(fileObj)[0]} className="flex bg-transparent h-[5vh] p-2 transform -skew-x-12">
           {
             animateDelays.map((delay, index) => {
               if (side === 'left') {
@@ -106,7 +106,7 @@ const LevelCard = ({ side, show, delayInAnimation, level, fileName, pageMode }) 
             })
           }
         </div>
-        {side === 'right' ? <div className="relative flex w-[17vh] h-full justify-center items-center bg-transparent"><LoaderSkillsBalls fileName={fileName} /></div> : null}
+        {side === 'right' ? <div className="relative flex w-[17vh] h-full justify-center items-center bg-transparent"><LoaderSkillsBalls fileId={Object.keys(fileObj)[0]} fileName={Object.values(fileObj)[0]}/></div> : null}
       </div>
     </>
   )
@@ -200,6 +200,7 @@ const EmergentMsg = ({ show, pageMode }) => {
       }
     }
   }
+  
   return (
     <>
       {
@@ -246,29 +247,32 @@ const EmergentMsg = ({ show, pageMode }) => {
 
 export const Skills = ({ show }) => {
   const { pageMode } = globalVariables()
-  const fileNames = ['jsDode.gltf', 'reactDode.gltf', 'threejsDode.gltf','pythonDode.gltf', 'djangoDode.gltf', 'blenderDode.gltf']
+  const files = useRef([{ball1:'jsDode.gltf'},{ball2: 'reactDode.gltf'},{ball3: 'threejsDode.gltf'},
+  {ball4:'pythonDode.gltf'}, {ball5:'djangoDode.gltf'}, {ball6:'blenderDode.gltf'}])
+
+
   return (
     <>
       <div className="relative flex w-full h-full overflow-hidden">
         <EmergentMsg show={show} pageMode={pageMode} />
         <div className="grid w-full h-full grid-cols-1 gap-0 pb-10 md:grid-cols-2 md:gap-24 md:pb-0 md:px-10">
           <div className="flex justify-start w-full h-[14vh]">
-            <LevelCard side={'left'} fileName={fileNames[0]} show={show} delayInAnimation={0.3} level={7} pageMode={pageMode} />
+            <LevelCard side={'left'} fileObj={files.current[0]} show={show} delayInAnimation={0.3} level={6} pageMode={pageMode} />
           </div>
           <div className="flex justify-end w-full h-[14vh]">
-            <LevelCard side={'right'} fileName={fileNames[3]} show={show} delayInAnimation={0.3} level={6} pageMode={pageMode} />
+            <LevelCard side={'right'} fileObj={files.current[3]} show={show} delayInAnimation={0.3} level={6} pageMode={pageMode} />
           </div>
           <div className="flex justify-start w-full h-[14vh]">
-            <LevelCard side={'left'} fileName={fileNames[1]} show={show} delayInAnimation={0.6} level={5} pageMode={pageMode} />
+            <LevelCard side={'left'} fileObj={files.current[1]} show={show} delayInAnimation={0.6} level={7} pageMode={pageMode} />
           </div>
           <div className="flex justify-end w-full h-[14vh]">
-            <LevelCard side={'right'} fileName={fileNames[4]} show={show} delayInAnimation={0.6} level={7} pageMode={pageMode} />
+            <LevelCard side={'right'} fileObj={files.current[4]} show={show} delayInAnimation={0.6} level={5} pageMode={pageMode} />
           </div>
           <div className="flex justify-start w-full h-[14vh]">
-            <LevelCard side={'left'} fileName={fileNames[2]} show={show} delayInAnimation={0.9} level={4} pageMode={pageMode} />
+            <LevelCard side={'left'} fileObj={files.current[2]} show={show} delayInAnimation={0.9} level={4} pageMode={pageMode} />
           </div>
           <div className="flex justify-end w-full h-[14vh]">
-            <LevelCard side={'right'} fileName={fileNames[5]} show={show} delayInAnimation={0.9} level={6} pageMode={pageMode} />
+            <LevelCard side={'right'} fileObj={files.current[5]} show={show} delayInAnimation={0.9} level={4} pageMode={pageMode} />
           </div>
          
         </div>

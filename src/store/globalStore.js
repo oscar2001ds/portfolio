@@ -12,8 +12,12 @@ export const globalVariables = create((set) => ({
         robotScale : newrobotScale
     })),
 
+    pageLoaded: false,
+    setPageLoaded: ( newpageLoaded) => set(state=>({ 
+        pageLoaded : newpageLoaded
+    })),
 
-    modelLoaded: {'robot':false,},
+    modelLoaded: {'robot':false, 'ball1':false, 'ball2':false, 'ball3':false, 'ball4':false, 'ball5':false, 'ball6':false,  },
     setModelLoaded: ( newmodelLoaded) => set(state=>({
         modelLoaded : {...state.modelLoaded,...newmodelLoaded}
     })),

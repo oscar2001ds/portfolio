@@ -26,10 +26,10 @@ const addMaterial = (model) => {
 }
 
 
-export const LoaderSkillsBalls = ({ fileName }) => {
+export const LoaderSkillsBalls = ({fileId, fileName }) => {
 
   const refContainer = useRef()
-  const { refreshContainerSize, setmodelTecHovered, stopRenderBalls } = globalVariables()
+  const { refreshContainerSize, setmodelTecHovered, stopRenderBalls, setModelLoaded } = globalVariables()
   const [rendererState, setRendererState] = useState(null)
   const [cameraState, setCameraState] = useState(null)
   const [controlState, setControlState] = useState(null)
@@ -180,7 +180,8 @@ export const LoaderSkillsBalls = ({ fileName }) => {
     // Loading Manager:
     const loadingManager = new THREE.LoadingManager()
     loadingManager.onLoad = () => {
-      console.log("tecnology ball loaded");
+      console.log(fileId, "loaded");
+      setModelLoaded({[fileId]: true })
     };
 
     // Draco loader:

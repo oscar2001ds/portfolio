@@ -34,7 +34,7 @@ export const Work = ({ show }) => {
   return (
     <>
       <div className="w-full h-full overflow-hidden flex justify-center">
-        <div className="flex flex-col w-full h-full justify-center items-center gap-9">
+        <div className="flex flex-col w-full sm:w-[80vw] h-full justify-center items-center gap-9">
           <div ref={descrContainerRef} className="w-full flex flex-col gap-4 px-8">
             <strong className="text-5xl md:text-6xl font-tektur">Works</strong>
             <div className="text-lg md:text-2xl">

@@ -46,7 +46,7 @@ export const AboutMe = ({ show }) => {
           {
             show == 'aboutme' || first
               ?
-              < div className="overflow-hidden w-full h-full text-sm xs:text-xl md:text-2xl lg:text-3xl">
+              < div className="overflow-hidden w-full h-full text-xs xs:text-[1rem] xs:leading-[1.4rem] sm:text-xl md:text-2xl lg:text-3xl">
                 <div>
                   <TypeAnimation
                     className="font-roboto"

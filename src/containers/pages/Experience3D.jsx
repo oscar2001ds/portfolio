@@ -18,7 +18,7 @@ export const Experience3D = ({ show }) => {
   const labItemsContainerRef = useRef(null)
   const robotContainerRef = useRef(null)
   const [robotModelHovered, setRobotModelHovered] = useState(null)
-  const { setAnimation, pageMode, maxHeight, setMaxHeight, maxWidth, setMaxWidth, setRobotScale } = globalVariables()
+  const { setAnimation, pageMode, maxHeight, setMaxHeight, maxWidth, setMaxWidth, setRobotScale, pageLoaded } = globalVariables()
   const [passWidth, setPassWidth] = useState(0)
   const [robotContainerDimensions, setRobotContainerDimensions] = useState([0, 0])
   const [prevShow, setPrevShow] = useState('home')
@@ -97,15 +97,30 @@ export const Experience3D = ({ show }) => {
 
   // robot animations
   useEffect(() => {
+    if (!pageLoaded) return;
     if (prevShow === 'home' && show === 'home' || prevShow === 'aboutme' && show === 'home') {
-      console.log('estoy en home 3 exp')
-      let posX = (labContainerRef.current.offsetLeft+labContainerRef.current.clientWidth/2) - robotContainerDimensions[0] / 2;
-      let posY = (labContainerRef.current.offsetTop*0.98+labContainerRef.current.clientHeight/2) - robotContainerDimensions[1] / 2;
-      gsap.to(robotContainerRef.current, {
-        opacity: 0,
-        x: `${posX-200}px`,
-        y: `${posY}px`,
-      });
+      let posX = (labContainerRef.current.offsetLeft + labContainerRef.current.clientWidth / 2) - robotContainerDimensions[0] / 2;
+      let posY = (labContainerRef.current.offsetTop * 0.98 + labContainerRef.current.clientHeight / 2) - robotContainerDimensions[1] / 2;
+
+      if (prevShow === 'home') {
+        setAnimation('firstAnimation')
+        gsap.to(robotContainerRef.current, {
+          opacity: 0,
+          x: `${posX - 200}px`,
+          y: `${0}px`,
+          duration: 0.01,
+        });
+      }
+      else {
+        gsap.to(robotContainerRef.current,
+          {
+            opacity: 0,
+            x: `${posX - 200}px`,
+            y: `${posY}px`,
+            duration: 1,
+          });
+      }
+
       setPrevShow('home')
       setResizeFlag(false)
     }
@@ -117,18 +132,12 @@ export const Experience3D = ({ show }) => {
     //Aboutme movements
     else if (prevShow != 'aboutme' && show === 'aboutme' || show === 'aboutme' && resizeFlag) {
 
-      let posX = (labContainerRef.current.offsetLeft+labContainerRef.current.clientWidth/2) - robotContainerDimensions[0] / 2;
-      let posY = (labContainerRef.current.offsetTop*0.98+labContainerRef.current.clientHeight/2) - robotContainerDimensions[1] / 2;
-      
+      let posX = (labContainerRef.current.offsetLeft + labContainerRef.current.clientWidth / 2) - robotContainerDimensions[0] / 2;
+      let posY = (labContainerRef.current.offsetTop * 0.98 + labContainerRef.current.clientHeight / 2) - robotContainerDimensions[1] / 2;
+
       if (!resizeFlag) {
         if (prevShow === 'home') {
-          gsap.fromTo(robotContainerRef.current, {
-            duration: 1,
-            opacity: 0,
-            x: `${posX-200}px`,
-            y: `${posY}px`,
-
-          }, {
+          gsap.to(robotContainerRef.current, {
             duration: 1,
             opacity: 1,
             x: `${posX}px`,
@@ -153,17 +162,17 @@ export const Experience3D = ({ show }) => {
 
       }
       else {
-          gsap.to(robotContainerRef.current, {
-            duration: 0.01,
-            opacity: 1,
-            x: `${posX}px`,
-            y: `${posY}px`,
-          })
-        if(maxWidth <1024 && passWidth >= 1024){
+        gsap.to(robotContainerRef.current, {
+          duration: 0.01,
+          opacity: 1,
+          x: `${posX}px`,
+          y: `${posY}px`,
+        })
+        if (maxWidth < 1024 && passWidth >= 1024) {
           setRobotScale('scale_normal')
           setAnimation('secuencia1_1')
         }
-        else if(maxWidth >= 1024 && passWidth < 1024){
+        else if (maxWidth >= 1024 && passWidth < 1024) {
           setRobotScale('scale_normal')
           setAnimation('secuencia1_1')
         }
@@ -175,8 +184,8 @@ export const Experience3D = ({ show }) => {
     // Skills movements
     else if (prevShow != 'skills' && show === 'skills' || show === 'skills' && resizeFlag) {
 
-      let posX = (capsuleContainerRef.current.offsetLeft+capsuleContainerRef.current.clientWidth/2) - robotContainerDimensions[0] / 2;
-      let posY = (capsuleContainerRef.current.offsetTop*0.95+capsuleContainerRef.current.clientHeight/2) - robotContainerDimensions[1] / 2;
+      let posX = (capsuleContainerRef.current.offsetLeft + capsuleContainerRef.current.clientWidth / 2) - robotContainerDimensions[0] / 2;
+      let posY = (capsuleContainerRef.current.offsetTop * 0.95 + capsuleContainerRef.current.clientHeight / 2) - robotContainerDimensions[1] / 2;
 
 
       if (maxWidth >= 768) {
@@ -252,8 +261,8 @@ export const Experience3D = ({ show }) => {
     // contact movements
     else if (show === 'contact' || resizeFlag) {
 
-      let posX = (labItemsContainerRef.current.offsetLeft*0.9+labItemsContainerRef.current.clientWidth/2) - robotContainerDimensions[0] / 2;
-      let posY = (labItemsContainerRef.current.offsetTop+labItemsContainerRef.current.clientHeight/2) - robotContainerDimensions[1] / 2;
+      let posX = (labItemsContainerRef.current.offsetLeft * 0.9 + labItemsContainerRef.current.clientWidth / 2) - robotContainerDimensions[0] / 2;
+      let posY = (labItemsContainerRef.current.offsetTop + labItemsContainerRef.current.clientHeight / 2) - robotContainerDimensions[1] / 2;
 
       if (!resizeFlag) {
         if (maxWidth >= 768) {
@@ -307,26 +316,26 @@ export const Experience3D = ({ show }) => {
     }
 
     setPassWidth(maxWidth);
-  }, [show, robotContainerDimensions]);
+  }, [show, robotContainerDimensions, pageLoaded]);
 
   return (
-    <div className="absolute w-full overflow-hidden" style={{height:`${maxWidth<1024?maxHeight*5.5:maxHeight*5}px`}} >
-      
+    <div className="absolute w-full overflow-hidden" style={{ height: `${maxWidth < 1024 ? maxHeight * 5.5 : maxHeight * 5}px` }} >
+
       {/* laboratory (888/721 es la relación del ancho y alto de la imagen)*/}
       <div ref={labContainerRef} className="absolute z-0 w-full lg:h-full lg:left-[200px] lg:w-[120%] lg:py-20"
-        style={{ top: `${maxWidth >= 1024 ? maxHeight*1.0 : maxHeight*1.4}px`, height: `${maxWidth >= 1024 ? maxHeight : maxHeight*0.5}px`}}>
+        style={{ top: `${maxWidth >= 1024 ? maxHeight * 1.0 : maxHeight * 1.4}px`, height: `${maxWidth >= 1024 ? maxHeight : maxHeight * 0.5}px` }}>
         <img
           style={{
             width: '100%',
             height: '100%',
-            objectFit: `${maxWidth/(maxHeight*0.5) > 888/721 ? 'contain' : 'cover'}`,
+            objectFit: `${maxWidth / (maxHeight * 0.5) > 888 / 721 ? 'contain' : 'cover'}`,
             transform: 'rotateY(180deg)',
           }}
           src={`${pageMode === 'red' ? labotaroryRedImage : pageMode === 'blue' ? labotaroryBlueImage : ''}`}
           alt="laboratory"
         />
       </div>
-        
+
       {/* capsule */}
       <div ref={capsuleContainerRef} className="absolute h-full w-[320px] z-0 inset-x-0 mx-auto hidden lg:flex"
         style={{ top: `${maxHeight * 2.0}px`, height: `${maxHeight}px` }}>
@@ -343,7 +352,7 @@ export const Experience3D = ({ show }) => {
 
       {/* lab items */}
       <div ref={labItemsContainerRef} className="absolute z-0 flex w-full h-[300px] right-0 lg:w-[550px] lg:h-[550px] lg:right-[5%]"
-        style={{ top: `${maxWidth > 1024 ? maxHeight * 4.1 : maxWidth > 768 ? maxHeight * 4.9 : maxHeight*4.95 }px`}}>
+        style={{ top: `${maxWidth > 1024 ? maxHeight * 4.1 : maxWidth > 768 ? maxHeight * 4.9 : maxHeight * 4.95}px` }}>
         <img
           style={{
             width: '100%',
@@ -356,7 +365,7 @@ export const Experience3D = ({ show }) => {
       </div>
 
       {/* robot */}
-      <div id="robotContainerId" ref={robotContainerRef} className={`absolute z-20 overflow-visible pointer-events-none lg:pointer-events-auto xs:w-[300px] lg:w-[500px] `} style={{ height: `${maxWidth >= 1024 ? maxHeight * 0.83 : maxHeight*0.5}px`, }}>
+      <div id="robotContainerId" ref={robotContainerRef} className={`opacity-0 absolute z-20 overflow-visible pointer-events-none lg:pointer-events-auto xs:w-[300px] lg:w-[500px] `} style={{ height: `${maxWidth >= 1024 ? maxHeight * 0.83 : maxHeight * 0.5}px`, }}>
         <LoaderRobot />
         <div onMouseEnter={handleHoverRobot} onMouseLeave={handleHoverRobot} className="absolute top-[20%] left-[40%] w-[20%] h-[60%]"></div>
         <div className={(show === 'skills' || show === 'contact' ? 'hidden ' : '') + "absolute pointer-events-none overflow-hidden w-[100px] flex h-[10vh]  bg-[#242424] shadow-md items-center justify-start opacity-90 border animate-once animate-duration-500 " +

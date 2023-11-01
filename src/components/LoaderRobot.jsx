@@ -25,6 +25,7 @@ let currentAnimationS1 = 'animGreeting';
 let S1_2 = false;
 let S1_3 = false;
 let S1_4 = false;
+let S1_First = false;
 
 export const LoaderRobot = () => {
 
@@ -187,7 +188,13 @@ export const LoaderRobot = () => {
       switch (currentAnimationS1) {
         case 'animGreeting':
           animaciones['animGreeting'].repetitions = 1;
-          crossfade(animaciones['animStretch'], animaciones['animGreeting'], 0.5)
+          if (S1_First) {
+            crossfade(animaciones['animFalling'], animaciones['animGreeting'], 0.6)
+            S1_First = false;
+          }
+          else{
+            crossfade(animaciones['animStretch'], animaciones['animGreeting'], 0.5)
+          }
           currentAnimationS1 = 'animStand';
           break;
         case 'animStand':
@@ -221,6 +228,13 @@ export const LoaderRobot = () => {
             S1_3 = false;
             break;
           }
+
+        case 'animOnlyFalling':
+          animaciones['animFalling'].repetitions = 1;
+          animaciones['animFalling'].play();
+          addMaterial({ wireframe: false })
+          setPassWireframe(false)
+          currentAnimationS1 = 'animOnlyFalling';
 
         case 'animThumbs':
           animaciones['animThumbs'].repetitions = 1;
@@ -282,7 +296,16 @@ export const LoaderRobot = () => {
       S1_4 = true;
       currentAnimationS1 = 'animThumbs';
       setAnimation('secuenciaBase');
-
+    }
+    else if (animation === 'firstAnimation') {
+      modelo.rotation.y = -initialRotation.y * 0.2
+      modelo.position.set(initialPosition.x, initialPosition.y, initialPosition.z);
+      S1_2 = false;
+      S1_3 = false;
+      S1_4 = false;
+      S1_First = true;
+      currentAnimationS1 = 'animOnlyFalling';
+      setAnimation('secuenciaBase');   
     }
 
 
@@ -359,7 +382,7 @@ export const LoaderRobot = () => {
     const loadingManager = new THREE.LoadingManager()
     loadingManager.onLoad = () => {
       console.log('Robot Loaded');
-      setModelLoaded({ 'robot': true })
+      setModelLoaded({robot: true })
     };
 
     // FBX loader:
