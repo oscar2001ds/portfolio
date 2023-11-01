@@ -103,7 +103,7 @@ export const Experience3D = ({ show }) => {
       let posY = (labContainerRef.current.offsetTop * 0.98 + labContainerRef.current.clientHeight / 2) - robotContainerDimensions[1] / 2;
 
       if (prevShow === 'home') {
-        setAnimation('firstAnimation')
+        setAnimation('secuenciaBase')
         gsap.to(robotContainerRef.current, {
           opacity: 1,
           x: `${posX - 200}px`,
