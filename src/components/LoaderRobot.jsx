@@ -59,7 +59,7 @@ export const LoaderRobot = () => {
         else if (child.name === 'Robot_Mesh') {
           let material;
           let diffuseTexture;
-          const texturePath = 'public/3Dmodels/robot/textures/'
+          const texturePath = '3Dmodels/robot/textures/'
                   
 
           material = child.material[0];

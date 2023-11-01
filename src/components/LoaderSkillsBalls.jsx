@@ -186,12 +186,12 @@ export const LoaderSkillsBalls = ({fileId, fileName }) => {
 
     // Draco loader:
     const dracoLoader = new DRACOLoader();
-    dracoLoader.setDecoderPath('public/draco/gltf/');
+    dracoLoader.setDecoderPath('draco/gltf/');
 
     // GLTF loader:
     const loader = new GLTFLoader(loadingManager);
     loader.setDRACOLoader(dracoLoader);
-    loader.load(`public/3Dmodels/dodecaedros/${fileName}`, function (gltf) {
+    loader.load(`3Dmodels/dodecaedros/${fileName}`, function (gltf) {
 
       //console.log(gltf);
       const model = gltf.scene;
