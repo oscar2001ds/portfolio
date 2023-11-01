@@ -2,7 +2,7 @@ import { create } from "zustand";
 
 export const globalVariables = create((set) => ({
     // Variables:
-    animation: 'anim1',
+    animation: 'firstAnimation',
     setAnimation: ( newanimation) => set(state=>({ 
         animation : newanimation
     })),
@@ -52,7 +52,7 @@ export const globalVariables = create((set) => ({
         changueRobotToFinalImage : newchangueRobotToFinalImage
     })),
 
-    pageMode: 'red',
+    pageMode: 'blue',
     setPageMode: ( newpageMode) => set(state=>({ 
         pageMode : newpageMode
     })),
