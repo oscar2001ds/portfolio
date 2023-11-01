@@ -52,7 +52,7 @@ export const globalVariables = create((set) => ({
         changueRobotToFinalImage : newchangueRobotToFinalImage
     })),
 
-    pageMode: 'red',
+    pageMode: 'blue',
     setPageMode: ( newpageMode) => set(state=>({ 
         pageMode : newpageMode
     })),
