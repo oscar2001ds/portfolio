@@ -139,15 +139,17 @@ export const Experience3D = ({ show }) => {
 
       if (!resizeFlag) {
         if (prevShow === 'home') {
-          gsap.to(robotContainerRef.current, {
-            duration: 1,
-            opacity: 1,
-            x: `${posX}px`,
-            y: `${posY}px`,
-          });
-          setRobotScale('scale_normal')
-          setAnimation('secuencia1_1')
-          setPrevShow('aboutme')
+          setTimeout(() => {
+            gsap.to(robotContainerRef.current, {
+              duration: 1,
+              opacity: 1,
+              x: `${posX}px`,
+              y: `${posY}px`,
+            });
+            setRobotScale('scale_normal')
+            setAnimation('secuencia1_1')
+            setPrevShow('aboutme')
+          }, 400);
         }
         else if (prevShow === 'skills' || prevShow === 'contact' || prevShow === 'work') {
           gsap.to(robotContainerRef.current, {
