@@ -18,7 +18,7 @@ export const Experience3D = ({ show }) => {
   const labItemsContainerRef = useRef(null)
   const robotContainerRef = useRef(null)
   const [robotModelHovered, setRobotModelHovered] = useState(null)
-  const { setAnimation, pageMode, maxHeight, setMaxHeight, maxWidth, setMaxWidth, setRobotScale, pageLoaded } = globalVariables()
+  const { setAnimation, pageMode, maxHeight, setMaxHeight, maxWidth, setMaxWidth, setRobotScale, pageLoaded, modelLoaded } = globalVariables()
   const [passWidth, setPassWidth] = useState(0)
   const [robotContainerDimensions, setRobotContainerDimensions] = useState([0, 0])
   const [prevShow, setPrevShow] = useState('home')
@@ -97,7 +97,7 @@ export const Experience3D = ({ show }) => {
 
   // robot animations
   useEffect(() => {
-    if (!pageLoaded) return;
+    if (!pageLoaded || !modelLoaded.robot ) return;
     if (prevShow === 'home' && show === 'home' || prevShow === 'aboutme' && show === 'home') {
       let posX = (labContainerRef.current.offsetLeft + labContainerRef.current.clientWidth / 2) - robotContainerDimensions[0] / 2;
       let posY = (labContainerRef.current.offsetTop * 0.98 + labContainerRef.current.clientHeight / 2) - robotContainerDimensions[1] / 2;
@@ -316,7 +316,7 @@ export const Experience3D = ({ show }) => {
     }
 
     setPassWidth(maxWidth);
-  }, [show, robotContainerDimensions, pageLoaded]);
+  }, [show, robotContainerDimensions, pageLoaded, modelLoaded]);
 
   return (
     <div className="absolute w-full overflow-hidden" style={{ height: `${maxWidth < 1024 ? maxHeight * 5.5 : maxHeight * 5}px` }} >
