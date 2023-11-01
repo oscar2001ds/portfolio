@@ -134,7 +134,7 @@ export const LoaderSkillsBalls = ({fileId, fileName }) => {
     const scene = new THREE.Scene();
 
     // Envaironment map:
-    const enviromentMap = new THREE.CubeTextureLoader().setPath('public/environmentMap/').load([
+    const enviromentMap = new THREE.CubeTextureLoader().setPath('environmentMap/').load([
       'px.png',
       'nx.png',
       'py.png',
