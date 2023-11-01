@@ -103,13 +103,15 @@ export const Experience3D = ({ show }) => {
       let posY = (labContainerRef.current.offsetTop * 0.98 + labContainerRef.current.clientHeight / 2) - robotContainerDimensions[1] / 2;
 
       if (prevShow === 'home') {
-        setAnimation('secuenciaBase')
-        gsap.to(robotContainerRef.current, {
-          opacity: 1,
-          x: `${posX - 200}px`,
-          y: `${0}px`,
-          duration: 0.01,
-        });
+        setTimeout(() => {
+          setAnimation('firstAnimation')
+          gsap.to(robotContainerRef.current, {
+            opacity: 1,
+            x: `${posX - 200}px`,
+            y: `${0}px`,
+            duration: 0.01,
+          });
+        }, 400);
       }
       else {
         gsap.to(robotContainerRef.current,

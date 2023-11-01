@@ -25,7 +25,7 @@ let currentAnimationS1 = 'animOnlyFalling';
 let S1_2 = false;
 let S1_3 = false;
 let S1_4 = false;
-let S1_First = true;
+let S1_First = false;
 
 export const LoaderRobot = () => {
 
