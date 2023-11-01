@@ -2,7 +2,7 @@ import { create } from "zustand";
 
 export const globalVariables = create((set) => ({
     // Variables:
-    animation: 'secuencia1_1',
+    animation: '',
     setAnimation: ( newanimation) => set(state=>({ 
         animation : newanimation
     })),

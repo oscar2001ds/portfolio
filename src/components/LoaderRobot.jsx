@@ -21,7 +21,7 @@ let animaciones = {}
 let animacionesCargadas = false
 let mixer
 let clock
-let currentAnimationS1 = 'animGreeting';
+let currentAnimationS1 = 'animOnlyFalling';
 let S1_2 = false;
 let S1_3 = false;
 let S1_4 = false;
@@ -30,7 +30,7 @@ let S1_First = false;
 export const LoaderRobot = () => {
 
   const refContainer = useRef()
-  const {animation, setAnimation, setModelLoaded, refreshContainerSize, stopRenderRobot, setChangueRobotToFinalImage, pageMode, maxWidth, robotScale } = globalVariables()
+  const { animation, setAnimation, setModelLoaded, refreshContainerSize, stopRenderRobot, setChangueRobotToFinalImage, pageMode, maxWidth, robotScale } = globalVariables()
   const [passPageMode, setPassPageMode] = useState(null)
   const [rendererState, setRendererState] = useState(null)
   const [cameraState, setCameraState] = useState(null)
@@ -47,7 +47,7 @@ export const LoaderRobot = () => {
     (m ? m : modelo).traverse((child) => {
       if (child.isMesh) {
         //console.log("Material: ", child)
-        
+
         if (child.name === 'Ground') {
           const material = new THREE.MeshBasicMaterial({
             color: 0x49FF00,
@@ -60,7 +60,7 @@ export const LoaderRobot = () => {
           let material;
           let diffuseTexture;
           const texturePath = '3Dmodels/robot/textures/'
-                  
+
 
           material = child.material[0];
           if (pageMode === 'red') material.color = new THREE.Color(0xBF0000);
@@ -92,7 +92,7 @@ export const LoaderRobot = () => {
 
   // Change robot color:
   useEffect(() => {
-    if(passPageMode === pageMode) return
+    if (passPageMode === pageMode) return
     if (sceneState) addMaterial({ wireframe: passWireframe })
     setPassPageMode(pageMode)
   }, [pageMode]);
@@ -164,6 +164,8 @@ export const LoaderRobot = () => {
   // Play Animation:
   useEffect(() => {
 
+    if (animation === '') return
+
     function crossfade(animFrom, animTo, duration) {
       animFrom.fadeOut(duration).play();
       animTo.fadeIn(duration).play();
@@ -184,7 +186,6 @@ export const LoaderRobot = () => {
 
     const secuence1 = (ev) => {
       stopAnimations();
-
       switch (currentAnimationS1) {
         case 'animGreeting':
           animaciones['animGreeting'].repetitions = 1;
@@ -192,7 +193,7 @@ export const LoaderRobot = () => {
             crossfade(animaciones['animFalling'], animaciones['animGreeting'], 0.6)
             S1_First = false;
           }
-          else{
+          else {
             crossfade(animaciones['animStretch'], animaciones['animGreeting'], 0.5)
           }
           currentAnimationS1 = 'animStand';
@@ -232,9 +233,12 @@ export const LoaderRobot = () => {
         case 'animOnlyFalling':
           animaciones['animFalling'].repetitions = 1;
           animaciones['animFalling'].play();
-          addMaterial({ wireframe: false })
-          setPassWireframe(false)
+          if (passWireframe) {
+            addMaterial({ wireframe: false })
+            setPassWireframe(false)
+          }
           currentAnimationS1 = 'animOnlyFalling';
+          break;
 
         case 'animThumbs':
           animaciones['animThumbs'].repetitions = 1;
@@ -305,7 +309,7 @@ export const LoaderRobot = () => {
       S1_4 = false;
       S1_First = true;
       currentAnimationS1 = 'animOnlyFalling';
-      setAnimation('secuenciaBase');   
+      setAnimation('secuenciaBase');
     }
 
 
@@ -382,7 +386,7 @@ export const LoaderRobot = () => {
     const loadingManager = new THREE.LoadingManager()
     loadingManager.onLoad = () => {
       console.log('Robot Loaded');
-      setModelLoaded({robot: true })
+      setModelLoaded({ robot: true })
     };
 
     // FBX loader:
@@ -450,7 +454,7 @@ export const LoaderRobot = () => {
       const newWidth = container.clientWidth;
       const newHeight = container.clientHeight;
 
-      camera.aspect = newWidth/newHeight;
+      camera.aspect = newWidth / newHeight;
       camera.updateProjectionMatrix();
       renderer.setSize(newWidth, newHeight);
     }
