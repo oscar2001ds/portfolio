@@ -23,7 +23,7 @@ export const LoadingPage = () => {
                 style={{
                     height: `${maxHeight}px`,
                 }}>
-                <strong className='font-tektur text-3xl'>Cargando</strong>
+                <strong className='font-tektur text-3xl'>Loading</strong>
                 <div className={`inline w-[2vw] h-[2vw] border-b-2 border-r-2 border-l-2 rounded-full overflow-hidden bg-transparent animate-spin animate-infinite
                 ${pageMode === 'red' ? 'border-red-800' : pageMode === 'blue' ? 'border-blue-800' : ''}`}></div>
             </div>

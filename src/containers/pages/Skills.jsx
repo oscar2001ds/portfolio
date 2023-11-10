@@ -177,7 +177,7 @@ const EmergentMsg = ({ show, pageMode }) => {
     'reactDode.gltf': 'React is my favorite library, just tell me what page you want and I will make it.',
     'threejsDode.gltf': 'With the help of threeJs I will create a 3D experience for you.',
     'pythonDode.gltf': 'I have worked with Python for more than 4 years in various applications.',
-    'djangoDode.gltf': 'I have knowledge in creating apis with django',
+    'djangoDode.gltf': 'I have knowledge in creating apis with django.',
     'blenderDode.gltf': 'I can create 3D models and animations with Blender.',
   }
 
