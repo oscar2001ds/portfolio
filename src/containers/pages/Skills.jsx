@@ -216,7 +216,7 @@ const EmergentMsg = ({ show, pageMode }) => {
                   left: maxWidth>1024 ? '55%' : maxWidth*0.5-100,
                 }
               }>
-              <p className="text-xs p-2 text-white opacity-100">
+              <p className="text-xs p-2 text-white opacity-100 font-handjet">
                 Go over the polygons and I'll tell you about my skills
               </p>
             </div>
@@ -232,7 +232,7 @@ const EmergentMsg = ({ show, pageMode }) => {
                   left: maxWidth>1024 ? '55%' :modelHoverdPosx,
                 }
               }>
-              <p className="text-xs p-2 text-white opacity-100">
+              <p className="text-xs p-2 text-white opacity-100 font-handjet">
                 {
                   modelTecHovered != '' ? txts[modelTecHovered] : null
                 }

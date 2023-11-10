@@ -1,7 +1,9 @@
-import { useState, useEffect, useRef } from "react"
-import { WorkCard } from "./WorkCard"
-import { gsap } from "gsap"
-import { globalVariables } from "../store/globalStore"
+import { useState, useEffect, useRef } from "react";
+import { WorkCard } from "./WorkCard";
+import { gsap } from "gsap";
+import { globalVariables } from "../store/globalStore";
+import {PrevButton} from '../assets/PrevButton.jsx';
+import {NextButton} from '../assets/NextButton.jsx';
 
 
 export const Carrousel = ({ show, cards, initialCardId }) => {
@@ -14,7 +16,8 @@ export const Carrousel = ({ show, cards, initialCardId }) => {
     const [startY, setStartY] = useState(null)
     const [proxCard, setProxCard] = useState(null)
     const carrouselContainerRef = useRef(null)
-
+    const [nextButtonClicked, setNextButtonClicked] = useState(false)
+    const [previousButtonClicked, setPreviousButtonClicked] = useState(false)
 
     useEffect(() => {
         if (passPageMode === pageMode) return
@@ -103,12 +106,31 @@ export const Carrousel = ({ show, cards, initialCardId }) => {
         
     }, [proxCard]);
 
+    useEffect(() => {
+        
+        if (previousButtonClicked) {
+            setTimeout(() => {
+                setPreviousButtonClicked(false)
+            }, 200);
+        }
+        if (nextButtonClicked) {
+            setTimeout(() => {
+                setNextButtonClicked(false)
+            }, 200);
+        }
+
+        
+    }, [previousButtonClicked, nextButtonClicked]);
+    
+
     const handleClick = (e) => {
         const id = e.target.id
         if (id === 'previous') {
+            setPreviousButtonClicked(true)
             setProxCard('previousButton')
         }
         else if (id === 'after') {
+            setNextButtonClicked(true)
             setProxCard('afterButton')
         }
     }
@@ -158,7 +180,7 @@ export const Carrousel = ({ show, cards, initialCardId }) => {
 
     return (
         <>
-            <div className="w-full h-full flex flex-col items-center justify-start gap-7">
+            <div className="w-full h-full flex flex-col items-center justify-start gap-2">
                 <div ref={carrouselContainerRef} className="relative w-[90%] h-[80%] flex justify-center items-center gap-7">
                     {
                         cards.map((card, index) => (
@@ -167,8 +189,8 @@ export const Carrousel = ({ show, cards, initialCardId }) => {
                     }
                 </div>
                 <div className="flex gap-5">
-                    <button id="previous" className={`rounded-full w-[40px] h-[40px] sm:hover:scale-110 ${buttonsColor}`} onClick={handleClick}>{'<'}</button>
-                    <button id="after" className={`rounded-full w-[40px] h-[40px] sm:hover:scale-110 ${buttonsColor}`} onClick={handleClick}>{'>'}</button>
+                    <button id="previous" className={`rounded-full w-[40px] h-[40px] ${previousButtonClicked?pageMode === 'red'?'bg-orange-400':'bg-[#0dc7fa]':buttonsColor} sm:hover:scale-110 p-2`} onClick={handleClick}><PrevButton/></button>
+                    <button id="after" className={`rounded-full w-[40px] h-[40px] ${nextButtonClicked?pageMode === 'red'?'bg-orange-400':'bg-[#0dc7fa]':buttonsColor} sm:hover:scale-110 p-2`} onClick={handleClick}><NextButton/></button>
                 </div>
             </div>
         </>

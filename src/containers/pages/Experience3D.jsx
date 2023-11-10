@@ -10,7 +10,6 @@ import labItemsRed from '../../../public/img/lab_items_red.png';
 import labItemsBlue from '../../../public/img/lab_items_blue.png';
 
 
-
 export const Experience3D = ({ show }) => {
   const [animationEndHoverRobot, setAnimationEndHoverRobot] = useState(true)
   const labContainerRef = useRef(null)
@@ -379,8 +378,8 @@ export const Experience3D = ({ show }) => {
             top: `${maxHeight * 0.15}px`,
             left: `${maxWidth > 1024 ? maxWidth * 0.15 : maxWidth > 640 ? maxWidth * 0.40 : maxWidth * 0.44}px`,
           }}>
-          <p className="text-xs text-white opacity-100">
-            Me gustan los carros deportivos y los supercoches.
+          <p className="text-sm text-white opacity-100 text-center font-bold font-handjet">
+            I like bits and burgers
           </p>
         </div>
       </div>
