@@ -18,6 +18,10 @@ export const getHomePageData = async () => {
       throw new Error(`Error fetching data: ${response.statusText}`);
     }
 
+    const parseImageUrl = (url) => {
+      return url && !url.startsWith('http') ? `${STRAPI_API_URL}${url}` : url;
+    };
+
     const data = await response.json();
     const serializedData = serializeResponse(data).homePage;
     const formattedData = {
@@ -27,7 +31,7 @@ export const getHomePageData = async () => {
         projects: serializedData?.work?.projects?.map((project) => ({
           ...project,
           image: {
-            url: project.image?.url ? `${STRAPI_API_URL}${project.image.url}` : null,
+            url: parseImageUrl(project.image?.url),
           },
         })) || [],
       },
