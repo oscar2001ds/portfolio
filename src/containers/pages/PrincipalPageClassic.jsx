@@ -10,17 +10,18 @@ import { Experience3D } from "./Experience3D"
 import { globalVariables } from "../../store/globalStore"
 import { LoadingPage } from "./LoadingPage"
 import { PageMode } from "../../components/PageMode"
+import { getHomePageData } from "../../services/getHomePageData.service"
 
 
 export const PrincipalPageClassic = () => {
-
+    const [pageData, setPageData] = useState(null)
     const [currentSection, setCurrentSection] = useState('')
     const [refHome, inViewHome, entryHome] = useInView({ threshold: 0.1, initialInView: true, });
     const [refAboutMe, inViewAboutMe, entryAboutMe] = useInView({ threshold: 0.1, });
     const [refSkills, inViewSkills, entrySkills] = useInView({ threshold: 0.1, });
     const [refWork, inViewWork, entryWork] = useInView({ threshold: 0.1, });
     const [refContact, inViewContact, entryContact] = useInView({ threshold: 0.1, });
-    const { refreshContainerSize, setStopRenderRobot, setStopRenderBalls, setStopRenderStatics, maxHeight, setMaxHeight, maxWidth, pageMode } = globalVariables()
+    const { setApiDataLoaded, refreshContainerSize, setStopRenderRobot, setStopRenderBalls, setStopRenderStatics, maxHeight, setMaxHeight, maxWidth, pageMode } = globalVariables()
 
     useEffect(() => {
 
@@ -68,6 +69,17 @@ export const PrincipalPageClassic = () => {
             }
         }
 
+        setApiDataLoaded(false)
+        const fetchData = async () => {
+            getHomePageData().then(data => {
+                if (data) {
+                    setPageData(data)
+                    setApiDataLoaded(true)
+                }
+            })
+        }
+
+        fetchData()
         window.addEventListener('touchmove', handleTouchMove, { passive: false })
 
         return () => {
@@ -76,12 +88,11 @@ export const PrincipalPageClassic = () => {
 
     }, []);
 
-
     return (
-        <>
-            <main>
-                <LoadingPage />
-
+        <main>
+            <LoadingPage />
+            {
+                pageData &&
                 <div className={`maincontainer relative w-[100vw] overflow-auto snap-y snap-mandatory 
                 ${pageMode === 'red' ? 'inset-0 opacity-100  bg-[conic-gradient(at_left,_var(--tw-gradient-stops))] from-red-950 via-black to-red-950' :
                         pageMode === 'blue' ? 'inset-0 opacity-100  bg-[conic-gradient(at_left,_var(--tw-gradient-stops))] from-blue-950 via-black to-blue-950'
@@ -105,24 +116,22 @@ export const PrincipalPageClassic = () => {
                     </div>
 
                     <div className={"snap-center flex w-full h-full justify-center"} ref={refAboutMe} id="aboutme">
-                        <AboutMe show={currentSection}></AboutMe>
+                        <AboutMe show={currentSection} data={pageData?.aboutMe} ></AboutMe>
                     </div>
 
                     <div className={"snap-center flex w-full h-full justify-center"} ref={refSkills} id="skills">
-                        <Skills show={currentSection}></Skills>
+                        <Skills show={currentSection} data={pageData?.skills}></Skills>
                     </div>
 
                     <div className={"snap-center flex w-full h-full justify-center"} ref={refWork} id="work">
-                        <Work show={currentSection}></Work>
+                        <Work show={currentSection} data={pageData?.work}></Work>
                     </div>
 
-                    <div className="snap-start flex w-full h-[150vh] lg:h-full justify-center" ref={refContact} id="contact">
+                    <div className="snap-start flex w-full h-[150dvh] lg:h-full justify-center" ref={refContact} id="contact">
                         <Contact show={currentSection}></Contact>
                     </div>
                 </div>
-            </main>
-
-        </>
+            }
+        </main>
     )
 }
-

@@ -1,4 +1,5 @@
 import './App.css'
+import 'swiper/css';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
 import { PrincipalPageClassic } from './containers/pages/PrincipalPageClassic'
 import { StrictMode } from 'react'

@@ -22,6 +22,11 @@ export const globalVariables = create((set) => ({
         modelLoaded : {...state.modelLoaded,...newmodelLoaded}
     })),
 
+    apiDataLoaded: false,
+    setApiDataLoaded: ( newapiDataLoaded) => set(state=>({ 
+        apiDataLoaded : newapiDataLoaded
+    })),
+
     refreshContainerSize: false,
     setRefreshContainerSize: ( newrefreshContainerSize) => set(state=>({
         refreshContainerSize : newrefreshContainerSize

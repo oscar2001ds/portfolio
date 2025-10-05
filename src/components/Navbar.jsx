@@ -69,7 +69,7 @@ export const Navbar = ({ model }) => {
         <>
             {estado === 0
                 ?
-                <aside className={'overflow-hidden flex justify-center items-center fixed flex-col right-0 w-[120px] h-[100vh] font-handjet text-lg sm:text-2xl '}>
+                <aside className={'overflow-hidden flex justify-center items-center fixed flex-col right-0 w-[120px] h-[100dvh] font-handjet text-lg sm:text-2xl '}>
                     <nav className={"flex justify-center items-center font-bold gap-8 sm:gap-10 flex-col "}>
                         <div className={'flex animate-once animate-duration-500 animate-delay-300 animate-fade-left'}>
                             <a name="home" href='#home' className={'sm:hover:opacity-100 sm:hover:scale-125 transition duration-100 ' +
@@ -95,7 +95,7 @@ export const Navbar = ({ model }) => {
                 </aside>
                 : estado === 1
                     ?
-                    <aside className={'overflow-hidden flex justify-center items-center fixed flex-col right-0 w-[120px] h-[100vh] font-handjet text-lg sm:text-2xl '}>
+                    <aside className={'overflow-hidden flex justify-center items-center fixed flex-col right-0 w-[120px] h-[100dvh] font-handjet text-lg sm:text-2xl '}>
                         <nav className={"flex justify-center items-center font-bold gap-8 sm:gap-10 flex-col "}>
                             <div className={'flex animate-once animate-duration-100 animate-delay-100 animate-fade-right-hidden'}>
                                 <a name="home" href='#home' className={'sm:hover:opacity-100 sm:hover:scale-125 transition duration-100 opacity-40 '}>Home</a>
@@ -116,7 +116,7 @@ export const Navbar = ({ model }) => {
                     </aside>
                     : estado === 2
                         ?
-                        <aside className={'overflow-hidden flex justify-center items-center fixed  bottom-0 w-[100vw] h-[12vh] font-handjet text-lg sm:text-2xl '}>
+                        <aside className={'overflow-hidden flex justify-center items-center fixed  bottom-0 w-[100vw] h-[12dvh] font-handjet text-lg sm:text-2xl '}>
                             <nav className={"flex justify-center items-center font-bold gap-8 sm:gap-10 "}>
                                 <div className={'flex animate-once animate-duration-500 animate-delay-300 animate-fade-up'}>
                                     <a name="home" href='#home' className={'sm:hover:opacity-100 sm:hover:scale-125 transition duration-100 ' +
@@ -142,7 +142,7 @@ export const Navbar = ({ model }) => {
                         </aside>
                         : estado === 3
                             ?
-                            <aside className={'overflow-hidden flex justify-center items-center fixed bottom-0 w-[100vw] h-[12vh] font-handjet text-lg sm:text-2xl '}>
+                            <aside className={'overflow-hidden flex justify-center items-center fixed bottom-0 w-[100vw] h-[12dvh] font-handjet text-lg sm:text-2xl '}>
                                 <nav className={"flex justify-center items-center font-bold gap-8 sm:gap-10 "}>
                                     <div className={'flex animate-once animate-duration-100 animate-delay-100 animate-fade-down-hidden'}>
                                         <a name="home" href='#home' className={'sm:hover:opacity-100 sm:hover:scale-125 transition duration-100 opacity-40 '}>Home</a>

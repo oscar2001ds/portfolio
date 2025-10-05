@@ -340,7 +340,7 @@ export const Experience3D = ({ show }) => {
       </div>
 
       {/* capsule */}
-      <div ref={capsuleContainerRef} className="absolute h-full w-[320px] z-0 inset-x-0 mx-auto hidden lg:flex"
+      <div ref={capsuleContainerRef} className="absolute w-[35dvh] z-0 inset-x-0 mx-auto hidden lg:flex"
         style={{ top: `${maxHeight * 2.0}px`, height: `${maxHeight}px` }}>
         <img
           style={{
@@ -354,8 +354,8 @@ export const Experience3D = ({ show }) => {
       </div>
 
       {/* lab items */}
-      <div ref={labItemsContainerRef} className="absolute z-0 flex w-full h-[300px] right-0 lg:w-[550px] lg:h-[550px] lg:right-[5%]"
-        style={{ top: `${maxWidth > 1024 ? maxHeight * 4.1 : maxWidth > 768 ? maxHeight * 4.9 : maxHeight * 4.95}px` }}>
+      <div ref={labItemsContainerRef} className="absolute z-0 flex w-full h-[30dvh] right-0 lg:w-[550px] lg:h-[550px] lg:right-[5%]"
+        style={{ top: `${maxWidth > 1024 ? maxHeight * 4.2 : maxWidth > 768 ? maxHeight * 4.9 : maxHeight * 4.95}px` }}>
         <img
           style={{
             width: '100%',
@@ -368,10 +368,10 @@ export const Experience3D = ({ show }) => {
       </div>
 
       {/* robot */}
-      <div id="robotContainerId" ref={robotContainerRef} className={`opacity-0 absolute z-20 overflow-visible pointer-events-none lg:pointer-events-auto xs:w-[300px] lg:w-[500px] `} style={{ height: `${maxWidth >= 1024 ? maxHeight * 0.83 : maxHeight * 0.5}px`, }}>
+      <div id="robotContainerId" ref={robotContainerRef} className={`opacity-0 absolute z-20 overflow-visible pointer-events-none lg:pointer-events-auto w-[50vw] `} style={{ height: `${maxWidth >= 1024 ? maxHeight * 0.83 : maxHeight * 0.5}px`, }}>
         <LoaderRobot />
         <div onMouseEnter={handleHoverRobot} onMouseLeave={handleHoverRobot} className="absolute top-[20%] left-[40%] w-[20%] h-[60%]"></div>
-        <div className={(show === 'skills' || show === 'contact' ? 'hidden ' : '') + "absolute pointer-events-none overflow-hidden w-[100px] flex h-[10vh]  bg-[#242424] shadow-md items-center justify-start opacity-90 border animate-once animate-duration-500 " +
+        <div className={(show === 'skills' || show === 'contact' ? 'hidden ' : '') + "absolute pointer-events-none overflow-hidden w-[100px] flex h-[10dvh]  bg-[#242424] shadow-md items-center justify-start opacity-90 border animate-once animate-duration-500 " +
           (robotModelHovered ? 'animate-flip-up ' : animationEndHoverRobot ? 'hidden ' : 'animate-flip-up-reverse ') + (pageMode === 'red' ? 'shadow-red-950 border-red-950 ' : pageMode === 'blue' ? 'shadow-blue-950 border-blue-950 ' : ' ')}
           onAnimationEnd={handleHoverRobot}
           style={{

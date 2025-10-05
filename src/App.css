@@ -23,3 +23,18 @@
     scrollbar-width: none;
     /* Firefox */
 }
+
+/* Estilos customizados para el slider con SwiperJS */
+span.swiper-pagination-bullet {
+  width: 28px;
+  height: 5px;
+  border-radius: 19px;
+  background-color: #d9d9d9;
+  opacity: 1;
+  transition: all 0.3s ease;
+}
+
+span.swiper-pagination-bullet-active {
+  width: 46px;
+  background-color: var(--secondary-color);
+}

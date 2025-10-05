@@ -76,7 +76,6 @@ const ContactForm = ({ setMessageSend }) => {
 
   return (
     <>
-
       <div className={`w-full h-full rounded-2xl ${colorForm.bgForm}` }>
         <form ref={form} className="w-full h-full rounded-2xl flex flex-col gap-3 p-2" onSubmit={sendEmail}>
           <input
@@ -251,11 +250,11 @@ export const Contact = ({ show }) => {
         <div ref={alertMessageContainer} className='absolute z-40 top-5 right-5'>
           <AlertMessage messageSend={messageSend} />
         </div>
-        <div className="absolute z-30 w-[85%] lg:w-[70%] h-full flex flex-col justify-start items-center gap-4 pt-10">
-          <div ref={contactMsjContainer} className='w-full sm:w-[500px]'>
+        <div className="absolute z-30 w-[85%] lg:w-[70%] h-full flex flex-col justify-start items-center gap-4 pt-24">
+          <div ref={contactMsjContainer} className='w-full sm:w-[500px] 2xl:w-[600px]'>
             <ContactMsj />
           </div>
-          <div ref={contactFormContainer} className='w-full h-[40%] sm:w-[500px] lg:h-[65%]'>
+          <div ref={contactFormContainer} className='w-full h-[40%] sm:w-[500px] 2xl:w-[600px] lg:h-[65%]'>
             <ContactForm setMessageSend={setMessageSend} />
           </div>
         </div>

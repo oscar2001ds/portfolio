@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from 'react'
-import { v4 as uuidv4 } from 'uuid';
 import { globalVariables } from "../store/globalStore"
+import { BlocksRenderer } from "@strapi/blocks-react-renderer"
 
-export const WorkCard = ({ id, img, title, tecs, desc, currentCard, setCurrentCard, pageDir, codeDir }) => {
+export const WorkCard = ({ id, image, title, tecs, description, pageUrl, codeUrl }) => {
   const colors = ['bg-yellow-600', 'bg-blue-300', 'bg-transparent border-[1px] rounded-full', 'bg-indigo-300', 'bg-purple-300', 'bg-pink-300', 'bg-gray-300', 'bg-yellow-300']
-  const [pointer, setPointer] = useState(true)
   const { pageMode } = globalVariables()
   const [passPageMode, setPassPageMode] = useState(null)
 
@@ -15,10 +14,6 @@ export const WorkCard = ({ id, img, title, tecs, desc, currentCard, setCurrentCa
     'bgVisit': 'bg-orange-700',
     'bgVisitHover': 'hover:bg-orange-500',
   })
-
-  const handleClick = (e) => {
-    setCurrentCard(id)
-  }
 
   useEffect(() => {
     if (passPageMode === pageMode) return
@@ -36,7 +31,7 @@ export const WorkCard = ({ id, img, title, tecs, desc, currentCard, setCurrentCa
     else if (pageMode === 'blue') {
       colCard = {
         'bgCard': 'bg-[#24628bff]',
-        'bgHoverCard': 'sm:hover:bg-blue-600',
+        'bgHoverCard': 'sm:hover:bg-[#2e7cb0ff]',
         'bgImg': 'bg-gray-300',
         'bgVisit': 'bg-gradient-to-r from-gray-500 via-cyan-700 to-[#0dc7fa] opacity-70',
         'bgVisitHover': 'hover:opacity-100',
@@ -46,44 +41,37 @@ export const WorkCard = ({ id, img, title, tecs, desc, currentCard, setCurrentCa
     setPassPageMode(pageMode)
   }, [pageMode, []]);
 
-  useEffect(() => {
-    if (currentCard === id) {
-      setPointer(false)
-    } else {
-      setPointer(true)
-    }
-  }, [currentCard]);
-
   return (
-    <>
-      <div id={id} className={`flex ${pointer ? 'cursor-pointer' : ''}`} onClick={handleClick}>
-        <div className={`w-[250px] h-[44vh] rounded-xl ${colorCard.bgCard} overflow-hidden flex flex-col ${pointer ? colorCard.bgHoverCard+' sm:hover:-translate-y-2' : 'translate-y-0'}`}>
-          <div className={`h-[50%] rounded-lg m-[0.38rem] overflow-hidden ${colorCard.bgImg}`}>
-            <img src={`img/${img} `} alt="" className="w-full h-full object-cover" style={{objectFit:'cover'}} />
-          </div>
-          <div className="font-bold text-lg flex justify-start mx-[0.38rem] pointer-events-none">
-            {title}
-          </div>
-          <div className="flex">
-            {
-              tecs.map((tec, index) => {
-                return (
-                  <div key={uuidv4()} className={`${colors[index]} rounded-md flex justify-center overflow-hidden px-1 ml-[0.38rem] pointer-events-none`} style={{ fontSize: '0.5rem', lineHeight: '0.8rem' }}>
-                    {tec}
-                  </div>
-                )
-              })
-            }
-          </div>
-          <div className="flex-grow rounded-md overflow-hidden m-[0.38rem] text-gray-300 text-start text-xs pointer-events-none">
-            {desc}
-          </div>
-          <div className="flex items-center m-[0.38rem] mt-auto gap-1">
-            <a href={`${codeDir}`} target='_blank' className={`rounded-lg bg-gray-500 px-1 overflow-hidden text-sm font-bold pb-[0.2rem] opacity-70 ${pointer ? '' : 'cursor-pointer hover:opacity-100'}`}>{'</>'}</a>
-            <a href={`${pageDir}`} target='_blank' className={`rounded-lg ${colorCard.bgVisit} px-1 overflow-hidden text-sm font-bold pb-[0.2rem] ${pointer ? '' : colorCard.bgVisitHover+' cursor-pointer'} flex flex-grow justify-center`}>visit</a>
-          </div>
+    <div id={id} className="w-full flex cursor-default">
+      <div className={`w-full h-[50dvh] sm:h-[44dvh] rounded-xl ${colorCard.bgCard} overflow-hidden flex flex-col transition-colors duration-200 ${colorCard.bgHoverCard}`}>
+        <div className={`h-[50%] rounded-lg m-[0.38rem] overflow-hidden ${colorCard.bgImg}`}>
+
+          <img src={image ?? ''} alt="" className="w-full h-full object-cover" style={{ objectFit: 'cover' }} />
+        </div>
+        <div className="font-bold text-lg flex justify-start mx-[0.38rem] pointer-events-none">
+          {title}
+        </div>
+        <div className="flex">
+          {
+            tecs?.map((tec, index) => {
+              return (
+                <div key={`${tec.text}-${index}`} className={`${colors[index]} rounded-md flex justify-center overflow-hidden px-1 ml-[0.38rem] pointer-events-none`} style={{ fontSize: '0.5rem', lineHeight: '0.8rem' }}>
+                  {tec.text}
+                </div>
+              )
+            })
+          }
+        </div>
+        <div className="flex-grow rounded-md overflow-hidden m-[0.38rem] text-gray-300 text-start text-xs pointer-events-none">
+          {description && (
+            <BlocksRenderer content={description} />
+          )}
+        </div>
+        <div className="flex items-center m-[0.38rem] mt-auto gap-1">
+          <a href={`${codeUrl}`} target='_blank' className={`rounded-lg h-full bg-gray-500 px-1 overflow-hidden text-sm font-bold py-[0.2rem] opacity-70 cursor-pointer hover:opacity-100 flex justify-center items-center transition-colors duration-200`}>{'</>'}</a>
+          <a href={`${pageUrl}`} target='_blank' className={`rounded-lg h-full ${colorCard.bgVisit} px-1 overflow-hidden text-sm font-bold py-[0.2rem] ${colorCard.bgVisitHover + ' cursor-pointer'} flex flex-grow justify-center items-center transition-colors duration-200`}>visit</a>
         </div>
       </div>
-    </>
+    </div>
   )
 }

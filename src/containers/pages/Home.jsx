@@ -61,7 +61,7 @@ export const Home = ({ show }) => {
             {refreshContainerSize
               ?
               <div className='w-full h-full flex flex-col justify-center items-center gap-6 text-9xl'
-                style={{ fontSize: '10vw', lineHeight: '20vh' }} >
+                style={{ fontSize: '10vw', lineHeight: '20dvh' }} >
                 <ChangeWordsAniamation text1={'Hello.'} text1Color={pageColors.primaryColor} text2={'Full'} text2Color={pageColors.primaryColor}
                   a1={'animate-fade-down'} a2={'animate-fade-up-hidden'} a3={'animate-fade-up'} a4={'animate-fade-down-hidden'} />
 
