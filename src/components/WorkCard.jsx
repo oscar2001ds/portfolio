@@ -68,8 +68,16 @@ export const WorkCard = ({ id, image, title, tecs, description, pageUrl, codeUrl
           )}
         </div>
         <div className="flex items-center m-[0.38rem] mt-auto gap-1">
-          <a href={`${codeUrl}`} target='_blank' className={`rounded-lg h-full bg-gray-500 px-1 overflow-hidden text-sm font-bold py-[0.2rem] opacity-70 cursor-pointer hover:opacity-100 flex justify-center items-center transition-colors duration-200`}>{'</>'}</a>
-          <a href={`${pageUrl}`} target='_blank' className={`rounded-lg h-full ${colorCard.bgVisit} px-1 overflow-hidden text-sm font-bold py-[0.2rem] ${colorCard.bgVisitHover + ' cursor-pointer'} flex flex-grow justify-center items-center transition-colors duration-200`}>visit</a>
+          {
+            codeUrl && (
+              <a href={`${codeUrl}`} target='_blank' className={`rounded-lg h-full bg-gray-500 px-1 overflow-hidden text-sm font-bold py-[0.2rem] opacity-70 cursor-pointer hover:opacity-100 flex justify-center items-center transition-colors duration-200`}>{'</>'}</a>
+            )
+          }
+          {
+            pageUrl && (
+              <a href={`${pageUrl}`} target='_blank' className={`rounded-lg h-full ${colorCard.bgVisit} px-1 overflow-hidden text-sm font-bold py-[0.2rem] ${colorCard.bgVisitHover + ' cursor-pointer'} flex flex-grow justify-center items-center transition-colors duration-200`}>visit</a>
+            )
+          }
         </div>
       </div>
     </div>
