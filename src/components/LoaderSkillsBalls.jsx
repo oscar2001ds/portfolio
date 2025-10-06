@@ -5,7 +5,9 @@ import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 import { DRACOLoader } from 'three/addons/loaders/DRACOLoader.js';
 import { globalVariables } from '../store/globalStore';
+import { parseUrl } from '../services/parseUrl';
 
+const STRAPI_API_URL = import.meta.env.VITE_STRAPI_API_URL || 'http://localhost:1337';
 
 const initialPosition = { 'x': 0, 'y': 0, 'z': 0 }
 const initialRotation = { 'x': 0, 'y': 0, 'z': 0 }
@@ -26,7 +28,7 @@ const addMaterial = (model) => {
 }
 
 
-export const LoaderSkillsBalls = ({fileId, fileName }) => {
+export const LoaderSkillsBalls = ({fileId, fileUrl }) => {
 
   const refContainer = useRef()
   const { refreshContainerSize, setmodelTecHovered, stopRenderBalls, setModelLoaded } = globalVariables()
@@ -93,7 +95,7 @@ export const LoaderSkillsBalls = ({fileId, fileName }) => {
       modelState.scale.y = scale.y * 1.2;
       modelState.scale.z = scale.z * 1.2;
       setVelRotation({ 'x': 0.002, 'y': 0.002, 'z': 0.005 })
-      setmodelTecHovered(fileName)
+      setmodelTecHovered(fileId)
     }
     else if (ev.type === 'mouseout') {
       modelState.scale.x = scale.x;
@@ -191,7 +193,7 @@ export const LoaderSkillsBalls = ({fileId, fileName }) => {
     // GLTF loader:
     const loader = new GLTFLoader(loadingManager);
     loader.setDRACOLoader(dracoLoader);
-    loader.load(`3Dmodels/dodecaedros/${fileName}`, function (gltf) {
+    loader.load(parseUrl(STRAPI_API_URL, fileUrl), function (gltf) {
 
       //console.log(gltf);
       const model = gltf.scene;

@@ -10,31 +10,49 @@ query {
         title
         level
         description
+        model {
+          url
+        }
       }
       tec2 {
         title
         level
         description
+        model {
+          url
+        }
       }
       tec3 {
         title
         level
         description
+        model {
+          url
+        }
       }
       tec4 {
         title
         level
         description
+        model {
+          url
+        }
       }
       tec5 {
         title
         level
         description
+        model {
+          url
+        }
       }
       tec6 {
         title
         level
         description
+        model {
+          url
+        }
       }
     }
     work {

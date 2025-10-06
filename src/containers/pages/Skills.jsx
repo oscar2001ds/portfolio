@@ -3,9 +3,8 @@ import { useEffect, useRef, useState } from "react"
 import { LoaderSkillsBalls } from "../../components/LoaderSkillsBalls"
 import { globalVariables } from "../../store/globalStore"
 
-
-
-const LevelCard = ({ side, show, delayInAnimation, level, fileObj, pageMode }) => {
+const LevelCard = ({ side, show, delayInAnimation, tecObj, ballId, pageMode }) => {
+  const { level, model } = tecObj
   const [initialColorNumber, setInitialColorNumber] = useState(null)
   const [levelBarClass, setLevelBarClass] = useState(null)
   const [levelBarClassActive, setLevelBarClassActive] = useState(null)
@@ -90,8 +89,8 @@ const LevelCard = ({ side, show, delayInAnimation, level, fileObj, pageMode }) =
   return (
     <>
       <div ref={descrContainerRef} className="flex items-center">
-        {side === 'left' ? <div className="relative flex w-[17dvh] h-full justify-center items-center bg-transparent"><LoaderSkillsBalls fileId={Object.keys(fileObj)[0]} fileName={Object.values(fileObj)[0]} /></div> : null}
-        <div id={Object.values(fileObj)[0]} className="flex bg-transparent h-[5dvh] p-2 transform -skew-x-12">
+        {side === 'left' ? <div className="relative flex w-[17dvh] h-full justify-center items-center bg-transparent"><LoaderSkillsBalls fileId={ballId} fileUrl={model?.url} /></div> : null}
+        <div id={ballId} className="flex bg-transparent h-[5dvh] p-2 transform -skew-x-12">
           {
             animateDelays.map((delay, index) => {
               if (side === 'left') {
@@ -106,7 +105,7 @@ const LevelCard = ({ side, show, delayInAnimation, level, fileObj, pageMode }) =
             })
           }
         </div>
-        {side === 'right' ? <div className="relative flex w-[17dvh] h-full justify-center items-center bg-transparent"><LoaderSkillsBalls fileId={Object.keys(fileObj)[0]} fileName={Object.values(fileObj)[0]}/></div> : null}
+        {side === 'right' ? <div className="relative flex w-[17dvh] h-full justify-center items-center bg-transparent"><LoaderSkillsBalls fileId={ballId} fileUrl={model?.url} /></div> : null}
       </div>
     </>
   )
@@ -122,7 +121,7 @@ const EmergentMsg = ({ show, pageMode, data }) => {
   const EmergentMsgRefContainer = useRef(null)
   const [modelHoverdPosx, setModelHoverdPosx] = useState(0)
   const [modelHoverdPosy, setModelHoverdPosy] = useState(0)
-  
+
 
   useEffect(() => {
     if (maxWidth >= 1024 && modelTecHovered != '') {
@@ -141,7 +140,7 @@ const EmergentMsg = ({ show, pageMode, data }) => {
       setModelHoverdPosy(document.getElementById(modelTecHovered).getBoundingClientRect().y)
 
     }
-    
+
   }, [modelTecHovered]);
 
   useEffect(() => {
@@ -173,12 +172,12 @@ const EmergentMsg = ({ show, pageMode, data }) => {
 
 
   const txts = {
-    'jsDode.gltf': data?.tec1?.description ?? 'I have experience with JavaScript and its main frameworks.',
-    'reactDode.gltf': data?.tec2?.description ?? 'React is my favorite library, just tell me what page you want and I will make it.',
-    'threejsDode.gltf': data?.tec3?.description ?? 'With the help of threeJs I will create a 3D experience for you.',
-    'pythonDode.gltf': data?.tec4?.description ?? 'I have worked with Python for more than 4 years in various applications.',
-    'djangoDode.gltf': data?.tec5?.description ?? 'I have knowledge in creating apis with django.',
-    'blenderDode.gltf': data?.tec6?.description ?? 'I can create 3D models and animations with Blender.',
+    'ball1': data?.tec1?.description ?? '',
+    'ball2': data?.tec2?.description ?? '',
+    'ball3': data?.tec3?.description ?? '',
+    'ball4': data?.tec4?.description ?? '',
+    'ball5': data?.tec5?.description ?? '',
+    'ball6': data?.tec6?.description ?? '',
   }
 
   const handleHoverTec = (ev) => {
@@ -200,44 +199,44 @@ const EmergentMsg = ({ show, pageMode, data }) => {
       }
     }
   }
-  
+
   return (
     <>
       {
-          first
-            ?
-            <div id="firstmsg" className={"absolute z-20 pointer-events-none overflow-hidden flex h-[10dvh] w-[10vw] bg-[#242424] shadow-md items-center justify-start opacity-90 border animate-once animate-duration-500 " +
-              (firstAnimStart ? 'animate-flip-up ' : firstAnimEnd ? 'hidden ' : 'animate-flip-up-reverse ') + (pageMode === 'red' ? 'shadow-red-950 border-red-950 ' : pageMode === 'blue' ? 'shadow-blue-950 border-blue-950 ' : ' ')} onAnimationEnd={handleFirst}
-              style={
-                {
-                  height: maxWidth>1024 ? '10dvh' : '100px',
-                  width: maxWidth>1024 ? '10vw' : '200px',
-                  top: maxWidth>1024 ? '18%' : maxHeight*0.5-50,
-                  left: maxWidth>1024 ? '55%' : maxWidth*0.5-100,
-                }
-              }>
-              <p className="text-xs 2xl:text-base p-2 text-white opacity-100 font-handjet">
-                {data?.baseDescription ?? "Go over the polygons and I'll tell you about my skills"}
-              </p>
-            </div>
-            :
+        first
+          ?
+          <div id="firstmsg" className={"absolute z-20 pointer-events-none overflow-hidden flex h-[10dvh] w-[10vw] bg-[#242424] shadow-md items-center justify-start opacity-90 border animate-once animate-duration-500 " +
+            (firstAnimStart ? 'animate-flip-up ' : firstAnimEnd ? 'hidden ' : 'animate-flip-up-reverse ') + (pageMode === 'red' ? 'shadow-red-950 border-red-950 ' : pageMode === 'blue' ? 'shadow-blue-950 border-blue-950 ' : ' ')} onAnimationEnd={handleFirst}
+            style={
+              {
+                height: maxWidth > 1024 ? '10dvh' : '100px',
+                width: maxWidth > 1024 ? '10vw' : '200px',
+                top: maxWidth > 1024 ? '18%' : maxHeight * 0.5 - 50,
+                left: maxWidth > 1024 ? '55%' : maxWidth * 0.5 - 100,
+              }
+            }>
+            <p className="text-xs 2xl:text-base p-2 text-white opacity-100 font-handjet">
+              {data?.baseDescription ?? "Go over the polygons and I'll tell you about my skills"}
+            </p>
+          </div>
+          :
 
-            <div ref={EmergentMsgRefContainer} className={"absolute z-20 pointer-events-none overflow-hidden flex bg-[#242424] shadow-md items-center justify-start opacity-90 border animate-once animate-duration-500 " +
-              (modelTecHovered != '' ? 'animate-flip-up ' : animationEndHoverTec ? 'hidden ' : 'animate-flip-up-reverse ') + (pageMode === 'red' ? 'shadow-red-950 border-red-950 ' : pageMode === 'blue' ? 'shadow-blue-950 border-blue-950 ' : ' ')} onAnimationEnd={handleHoverTec}
-              style={
-                {
-                  height: maxWidth>1024 ? '10dvh' : '80px',
-                  width: maxWidth>1024 ? '10vw' : '200px',
-                  top: maxWidth>1024 ? '18%' :modelHoverdPosy-20,
-                  left: maxWidth>1024 ? '55%' :modelHoverdPosx ,
-                }
-              }>
-              <p className="text-xs 2xl:text-base p-2 text-white opacity-100 font-handjet">
-                {
-                  modelTecHovered != '' ? txts[modelTecHovered] : null
-                }
-              </p>
-            </div>
+          <div ref={EmergentMsgRefContainer} className={"absolute z-20 pointer-events-none overflow-hidden flex bg-[#242424] shadow-md items-center justify-start opacity-90 border animate-once animate-duration-500 " +
+            (modelTecHovered != '' ? 'animate-flip-up ' : animationEndHoverTec ? 'hidden ' : 'animate-flip-up-reverse ') + (pageMode === 'red' ? 'shadow-red-950 border-red-950 ' : pageMode === 'blue' ? 'shadow-blue-950 border-blue-950 ' : ' ')} onAnimationEnd={handleHoverTec}
+            style={
+              {
+                height: maxWidth > 1024 ? '10dvh' : '80px',
+                width: maxWidth > 1024 ? '10vw' : '200px',
+                top: maxWidth > 1024 ? '18%' : modelHoverdPosy - 20,
+                left: maxWidth > 1024 ? '55%' : modelHoverdPosx,
+              }
+            }>
+            <p className="text-xs 2xl:text-base p-2 text-white opacity-100 font-handjet">
+              {
+                modelTecHovered != '' ? txts[modelTecHovered] : null
+              }
+            </p>
+          </div>
 
       }
     </>
@@ -247,9 +246,14 @@ const EmergentMsg = ({ show, pageMode, data }) => {
 
 export const Skills = ({ show, data }) => {
   const { pageMode } = globalVariables()
-  const files = useRef([{ball1:'jsDode.gltf'},{ball2: 'reactDode.gltf'},{ball3: 'threejsDode.gltf'},
-  {ball4:'pythonDode.gltf'}, {ball5:'djangoDode.gltf'}, {ball6:'blenderDode.gltf'}])
-
+  const tecBase = {
+    title: "Default",
+    level: 5,
+    description: "Default description",
+    model: {
+      url: "/"
+    }
+  }
 
   return (
     <>
@@ -257,26 +261,24 @@ export const Skills = ({ show, data }) => {
         <EmergentMsg show={show} pageMode={pageMode} data={data} />
         <div className="grid w-full h-full grid-cols-1 gap-0 pb-10 md:grid-cols-2 md:gap-24 md:pb-0 md:px-10">
           <div className="flex justify-start w-full h-[14dvh]">
-            <LevelCard side={'left'} fileObj={files.current[0]} show={show} delayInAnimation={0.3} level={data?.tec1?.level ?? 0} pageMode={pageMode} />
+            <LevelCard side={'left'} tecObj={data?.tec1 ?? tecBase} ballId={"ball1"} show={show} delayInAnimation={0.3} pageMode={pageMode} />
           </div>
           <div className="flex justify-end w-full h-[14dvh]">
-            <LevelCard side={'right'} fileObj={files.current[3]} show={show} delayInAnimation={0.3} level={data?.tec4?.level ?? 0} pageMode={pageMode} />
+            <LevelCard side={'right'} tecObj={data?.tec4 ?? tecBase} ballId={"ball4"} show={show} delayInAnimation={0.3} pageMode={pageMode} />
           </div>
           <div className="flex justify-start w-full h-[14dvh]">
-            <LevelCard side={'left'} fileObj={files.current[1]} show={show} delayInAnimation={0.6} level={data?.tec2?.level ?? 0} pageMode={pageMode} />
+            <LevelCard side={'left'} tecObj={data?.tec2 ?? tecBase} ballId={"ball2"} show={show} delayInAnimation={0.6} pageMode={pageMode} />
           </div>
           <div className="flex justify-end w-full h-[14dvh]">
-            <LevelCard side={'right'} fileObj={files.current[4]} show={show} delayInAnimation={0.6} level={data?.tec5?.level ?? 0 } pageMode={pageMode} />
+            <LevelCard side={'right'} tecObj={data?.tec5 ?? tecBase} ballId={"ball5"} show={show} delayInAnimation={0.6} pageMode={pageMode} />
           </div>
           <div className="flex justify-start w-full h-[14dvh]">
-            <LevelCard side={'left'} fileObj={files.current[2]} show={show} delayInAnimation={0.9} level={data?.tec3?.level ?? 0} pageMode={pageMode} />
+            <LevelCard side={'left'} tecObj={data?.tec3 ?? tecBase} ballId={"ball3"} show={show} delayInAnimation={0.9} pageMode={pageMode} />
           </div>
           <div className="flex justify-end w-full h-[14dvh]">
-            <LevelCard side={'right'} fileObj={files.current[5]} show={show} delayInAnimation={0.9} level={data?.tec6?.level ?? 0} pageMode={pageMode} />
+            <LevelCard side={'right'} tecObj={data?.tec6 ?? tecBase} ballId={"ball6"} show={show} delayInAnimation={0.9} pageMode={pageMode} />
           </div>
-         
         </div>
-
       </div >
     </>
   )
