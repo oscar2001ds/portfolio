@@ -376,10 +376,10 @@ export const Experience3D = ({ show }) => {
           onAnimationEnd={handleHoverRobot}
           style={{
             top: `${maxHeight * 0.15}px`,
-            left: `${maxWidth > 1024 ? maxWidth * 0.15 : maxWidth > 640 ? maxWidth * 0.40 : maxWidth * 0.44}px`,
+            left: `${maxWidth > 1024 ? maxWidth * 0.20 : maxWidth > 640 ? maxWidth * 0.40 : maxWidth * 0.44}px`,
           }}>
           <p className="text-sm text-white opacity-100 text-center font-bold font-handjet">
-            I like bits and burgers
+            I like bits and burgers...
           </p>
         </div>
       </div>
