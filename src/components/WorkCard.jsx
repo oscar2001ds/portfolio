@@ -43,26 +43,26 @@ export const WorkCard = ({ id, image, title, tecs, description, pageUrl, codeUrl
 
   return (
     <div id={id} className="w-full flex cursor-default">
-      <div className={`w-full h-[50dvh] sm:h-[44dvh] rounded-xl ${colorCard.bgCard} overflow-hidden flex flex-col transition-colors duration-200 ${colorCard.bgHoverCard}`}>
-        <div className={`h-[50%] rounded-lg m-[0.38rem] overflow-hidden ${colorCard.bgImg}`}>
+      <div className={`w-full h-[50dvh] max-h-[530px] sm:h-[44dvh] rounded-xl ${colorCard.bgCard} overflow-hidden flex flex-col transition-colors duration-200 ${colorCard.bgHoverCard}`}>
+        <div className={`h-[40%] sm:h-[50%] rounded-lg m-[0.38rem] overflow-hidden ${colorCard.bgImg}`}>
 
           <img src={image ?? ''} alt="" className="w-full h-full object-cover" style={{ objectFit: 'cover' }} />
         </div>
-        <div className="font-bold text-lg flex justify-start mx-[0.38rem] pointer-events-none">
+        <div className="font-bold text-lg 2xl:text-xl flex justify-start mx-[0.38rem] pointer-events-none">
           {title}
         </div>
         <div className="flex">
           {
             tecs?.map((tec, index) => {
               return (
-                <div key={`${tec.text}-${index}`} className={`${colors[index]} rounded-md flex justify-center overflow-hidden px-1 ml-[0.38rem] pointer-events-none`} style={{ fontSize: '0.5rem', lineHeight: '0.8rem' }}>
+                <div key={`${tec.text}-${index}`} className={`${colors[index]} rounded-md flex justify-center overflow-hidden px-1 ml-[0.38rem] pointer-events-none text-[0.5rem] leading-[0.8rem] 2xl:text-[0.6rem] 2xl:leading-[1rem]`}>
                   {tec.text}
                 </div>
               )
             })
           }
         </div>
-        <div className="flex-grow rounded-md overflow-hidden m-[0.38rem] text-gray-300 text-start text-xs pointer-events-none">
+        <div className="flex-grow rounded-md overflow-hidden m-[0.38rem] text-gray-300 text-start text-xs 2xl:text-sm pointer-events-none">
           {description && (
             <BlocksRenderer content={description} />
           )}
