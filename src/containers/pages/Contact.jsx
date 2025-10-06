@@ -6,6 +6,8 @@ import linkedinLogo from '../../../public/img/linkedin.svg'
 import githubLogo from '../../../public/img/github.svg'
 import instagramLogo from '../../../public/img/instagram.svg'
 
+const { VITE_EMAILJS_SERVICE_ID = "", VITE_EMAILJS_TEMPLATE_ID = "", VITE_EMAILJS_PUBLIC_KEY = "" } = import.meta.env;
+
 const ContactForm = ({ setMessageSend }) => {
   const form = useRef();
   const [name, setName] = useState('');
@@ -45,7 +47,7 @@ const ContactForm = ({ setMessageSend }) => {
   const sendEmail = (e) => {
     e.preventDefault();
 
-    emailjs.sendForm('OscarDiazDev', 'template_iumejbs', form.current, 'SbPI_e6rPeBvnj24q')
+    emailjs.sendForm(VITE_EMAILJS_SERVICE_ID, VITE_EMAILJS_TEMPLATE_ID, form.current, VITE_EMAILJS_PUBLIC_KEY)
       .then((result) => {
         setMessageSend(true)
       }, (error) => {
