@@ -1,6 +1,6 @@
 import { HOME_PAGE_QUERY } from "../queries/HomePageQuery.graphql";
 import serializeResponse from "../utils/serializeResponse";
-import { parseUrl } from "./parseUrl";
+import { parseUrl } from "../utils/parseUrl";
 
 const STRAPI_API_URL = import.meta.env.VITE_STRAPI_API_URL || 'http://localhost:1337';
 
